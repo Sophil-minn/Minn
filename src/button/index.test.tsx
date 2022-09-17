@@ -1,7 +1,6 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import Button from './index';
-import { fireEvent } from '../../node_modules/@storybook/testing-library/dist/cjs';
 
 describe('Button', () => {
   test('renders Button', () => {
