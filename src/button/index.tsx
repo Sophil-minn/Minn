@@ -16,9 +16,10 @@ interface buttonProps extends React.HTMLAttributes<HTMLButtonElement> {
 }
 
 const Button = (props: buttonProps) => {
-  const { children, className, type = 'normal', onClick, ...others} = props;
+  const { children, className, size='normal', type = 'normal', onClick, ...others} = props;
   const cls = classNames({
     'ant-btn': true,
+    [`ant-btn-${size}`]: size,
     [`ant-btn-${type}`]: type,
     [className as string]: !!className
   });

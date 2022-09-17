@@ -4,7 +4,7 @@ import React, { ReactNode } from 'react';
 //（2）接受多个类名：classnames(class1,class2,{ class3:false })
 import classNames from 'classnames';
 
-import './index.css';
+import './index.scss';
 
 interface buttonProps {
   className?: string;

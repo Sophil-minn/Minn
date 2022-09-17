@@ -16,6 +16,11 @@ test('renders normal Button', () => {
   expect(container.querySelector('.ant-btn-normal')).toBeInTheDocument();
 });
 
+test('renders small Button', () => {
+  const { container } = render(<Button size='small'>click me</Button>);
+  // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+  expect(container.querySelector('.ant-btn-small')).toBeInTheDocument();
+});
 
 test("renders primary Button", () => {
   const { container } = render(<Button type="primary">click me</Button>);
