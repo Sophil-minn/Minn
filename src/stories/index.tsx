@@ -9,14 +9,16 @@ import './index.css';
 interface buttonProps {
   className?: string;
   type?: 'normal' | 'primary' | "dashed" | "text" | "link";
+  size?: "small" | "medium" | 'large';
   children?: ReactNode;
   style?: React.CSSProperties;
 }
 
 const Button = (props: buttonProps) => {
-  const { children, className, type = 'normal', style} = props;
+  const { children, size = 'medium', className, type = 'normal', style} = props;
   const cls = classNames({
     'ant-btn': true,
+    [`ant-btn-${size}`]: size,
     [`ant-btn-${type}`]: type,
     [className as string]: !!className
   });
