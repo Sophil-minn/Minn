@@ -31,3 +31,17 @@ test('should support click', () => {
   fireEvent.click(linkElement);
   expect(onClick).toBeCalled();
 })
+test('should support blur', () => {
+  const onBlur = jest.fn();
+  render(<Button type="primary" onClick={onBlur}>click me</Button>)
+  const linkElement = screen.getByText(/click me/i);
+  fireEvent.click(linkElement);
+  expect(onBlur).toBeCalled();
+})
+test('should support focus', () => {
+  const onFocus = jest.fn();
+  render(<Button type="primary" onFocus={onFocus}>click me</Button>)
+  const linkElement = screen.getByText(/click me/i);
+  fireEvent.focus(linkElement);
+  expect(onFocus).toBeCalled();
+})

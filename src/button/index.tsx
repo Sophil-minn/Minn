@@ -6,21 +6,22 @@ import classNames from 'classnames';
 
 import './index.css';
 
-interface buttonProps {
+interface buttonProps extends React.HTMLAttributes<HTMLButtonElement> {
   className?: string;
   type?: 'normal' | 'primary';
   children?: ReactNode;
-  onClick?: Function;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onBlur?: React.FocusEventHandler<HTMLButtonElement>;
 }
 
 const Button = (props: buttonProps) => {
-  const { children, className, type = 'normal', onClick} = props;
+  const { children, className, type = 'normal', onClick, onBlur, ...others} = props;
   const cls = classNames({
     'ant-btn': true,
     [`ant-btn-${type}`]: type,
     [className as string]: !!className
   });
-  return <button className={cls} onClick={onClick}>{children}</button>
+  return <button {...others} className={cls} onClick={onClick} onBlur={onBlur}>{children}</button>
 }
 
 export default Button;
