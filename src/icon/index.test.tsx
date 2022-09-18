@@ -28,7 +28,6 @@ test('renders custom className', () => {
 test('should support click', () => {
   const onClick = jest.fn();
   const { container } = render(<Icon type="copy" onClick={onClick}/>);
-  // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
   const linkElement = container.querySelector('svg') as SVGSVGElement;
   fireEvent.click(linkElement);
   expect(onClick).toBeCalled();
