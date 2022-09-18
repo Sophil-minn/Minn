@@ -3,7 +3,7 @@ import React, { ReactNode, useState } from 'react';
 // true表示相应的class生效，反之false表示不生效。
 //（2）接受多个类名：classnames(class1,class2,{ class3:false })
 import classNames from 'classnames';
-import Icon from '../icon/index';
+import { CloseOutlined } from '@ant-design/icons';
 
 import './index.scss';
 
@@ -23,6 +23,7 @@ const Tag = (props: tagProps) => {
     closable, 
     visible: pvisible, 
     color,
+    onClose,
     ...others
   } = props;
   const [visible, setVisible] = useState<boolean>(pvisible || true);
@@ -38,18 +39,21 @@ const Tag = (props: tagProps) => {
     style.backgroundColor = color;
   }
 
-  const handleClick = () => {
-    setVisible(false);
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+    onClose?.(e);
+    if (e.defaultPrevented) {
+      return;
+    }
+    if (!('visible' in props)) {
+      setVisible(false);
+    }
   }
   if (!visible) {
     return null;
   }
   return <span {...others} className={cls} style={style}>
     {children}
-    {closable ? <Icon 
-      type="close" 
-      size={16} 
-      style={{ verticalAlign: "text-top"}}
+    {closable ? <CloseOutlined
       onClick={handleClick}
      />: null}
     
