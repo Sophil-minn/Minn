@@ -1,20 +1,20 @@
 import React from 'react';
-import { fireEvent, getByText, render, screen } from '@testing-library/react';
-import { waitFor } from "@testing-library/react-native";
+import { fireEvent, render, screen } from '@testing-library/react';
 import Tag from './index';
 
 describe('Tag', () => {
-  test('renders Tag', () => {
-    const { container } = render(<Tag />);
-    // eslint-disable-next-line testing-library/prefer-screen-queries
-    // const eins = getByTestId("text");
-    // eslint-disable-next-line testing-library/no-node-access
-    // expect(eins.children[0]).toEqual("click me");
-    // const linkElement = screen.getByText(/click me/i);
-    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-    expect(container.querySelector('span')).toBeInTheDocument();
-
+    test('renders Tag', () => {
+      render(<Tag>click me </Tag>)
+      const linkElement = screen.getByText(/click me/i);
+      expect(linkElement).toBeInTheDocument();
+    })
   })
-  // waitFor(() => expect(getByText("Your-text")).toBeInTheDocument());
 
+
+test('should support onClose', () => {
+  const onClose = jest.fn();
+  const { container } =  render(<Tag onClose={onClose}>close me</Tag>)
+  const linkElement = container.querySelector('span') as SVGSVGElement;
+  fireEvent.click(linkElement);
+  expect(onClose).toBeCalled();
 })

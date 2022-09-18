@@ -21,12 +21,17 @@ const Tag = (props: tagProps) => {
     className,  
     children, 
     closable, 
-    visible: pvisible, 
     color,
     onClose,
     ...others
   } = props;
-  const [visible, setVisible] = useState<boolean>(pvisible || true);
+  const [visible, setVisible] = useState<boolean>(true);
+
+  React.useEffect(() => {
+    if ('visible' in props && typeof props.visible !== 'undefined') {
+      setVisible(props.visible);
+    }
+  }, [props.visible]);
   const customColor = color && color.match(/^#/);
   const cls = classNames({ 
     'ant-tag': true,
