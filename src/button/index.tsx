@@ -4,26 +4,25 @@ import React, { ReactNode } from 'react';
 //（2）接受多个类名：classnames(class1,class2,{ class3:false })
 import classNames from 'classnames';
 
-import './index.css';
+import './index.scss';
 
 interface buttonProps extends React.HTMLAttributes<HTMLButtonElement> {
   className?: string;
-  type?: 'normal' | 'primary';
-  size?: "small" | "large" | "normal";
+  type?: 'normal' | 'primary' | "dashed" | "text" | "link";
+  size?: "small" | "medium" | 'large';
   children?: ReactNode;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  onBlur?: React.FocusEventHandler<HTMLButtonElement>;
+  style?: React.CSSProperties;
 }
 
 const Button = (props: buttonProps) => {
-  const { children, className, size='normal', type = 'normal', onClick, ...others} = props;
+  const { children, size = 'medium', className, type = 'normal', style, ...others} = props;
   const cls = classNames({
     'ant-btn': true,
     [`ant-btn-${size}`]: size,
     [`ant-btn-${type}`]: type,
     [className as string]: !!className
   });
-  return <button {...others} className={cls} onClick={onClick}>{children}</button>
+  return <button {...others} className={cls} style={style}>{children}</button>
 }
 
 export default Button;

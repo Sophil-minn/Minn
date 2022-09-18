@@ -2,15 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import Button from './button';
+import Icon from './icon/index';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <Button type="primary">click me</Button>
-    <Button>click me</Button>
+    <Icon type="fixed">click me</Icon>
+    <Icon>click me</Icon>
   </React.StrictMode>
 );
 
