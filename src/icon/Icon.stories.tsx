@@ -22,6 +22,9 @@ const style = {
   marginLeft: '8px'
 }
 
+export const Copy = () => {
+  return <Icon type="copy" />
+}
 
 
 // export const Large = Template.bind({});
