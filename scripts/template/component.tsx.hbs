@@ -14,7 +14,7 @@ export interface {{dirName}}Props extends React.HTMLAttributes<HTMLDivElement> {
   style?: CSSProperties;
 }
 
-const {{componentName}} = (props: buttonProps) => {
+const {{componentName}} = (props: {{dirName}}Props) => {
   const { children, size = 'medium', className, type = 'normal', style, ...others} = props;
   const cls = classNames({
     'ant-btn': true,

@@ -21,6 +21,7 @@ const lowCase = str => str.replace(/[A-Z]/g, m => `-${m.toLowerCase()}`).replace
   
   spawn('mkdir', ['-p', path.join(process.cwd(), `src/${dirName}`)])
 
+  //读取模版
   const tplFiles = glob.sync(path.join(__dirname, 'template/*.hbs'));
   tplFiles.forEach((async filePath => {
     const content = await fs.readFile(filePath, 'utf-8');
