@@ -1,50 +1,50 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import {{ComponentName}} from '../{{ComponentName}}';
+import {{componentName}} from '../{{componentName}}';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Example/{{ComponentName}}',
-  component: {{ComponentName}},
+  title: 'Example/{{componentName}}',
+  component: {{componentName}},
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     backgroundColor: { control: 'color' },
   },
-} as ComponentMeta<typeof {{ComponentName}}>;
+} as ComponentMeta<typeof {{componentName}}>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof {{ComponentName}}> = (args) => <{{ComponentName}} {...args} />;
+const Template: ComponentStory<typeof {{componentName}}> = (args) => <{{componentName}} {...args} />;
 
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
   type: 'primary',
-  children: '{{ComponentName}}',
+  children: '{{componentName}}',
 };
 
 
 export const Basic = () => { 
   return (
     <>
-    <{{ComponentName}} type="primary" >Primary {{ComponentName}}</{{ComponentName}}>
+    <{{componentName}} type="primary" >Primary {{componentName}}</{{componentName}}>
   </>
   )
 }
 
 export const Secondary = Template.bind({});
 Secondary.args = {
-  children: '{{ComponentName}}',
+  children: '{{componentName}}',
 };
 
 // export const Large = Template.bind({});
 // Large.args = {
 //   size: 'large',
-//   label: '{{ComponentName}}',
+//   label: '{{componentName}}',
 // };
 
 // export const Small = Template.bind({});
 // Small.args = {
 //   size: 'small',
-//   label: '{{ComponentName}}',
+//   label: '{{componentName}}',
 // };

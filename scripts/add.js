@@ -31,7 +31,8 @@ const lowCase = str => str.replace(/[A-Z]/g, m => `-${m.toLowerCase()}`).replace
       componentName
     });
     const newPath = filePath.replace('scripts/template', `src/${dirName}`)
-      .replace('component', componentName)
+      .replace('componentName', componentName)
+      // .replace('component', componentName)
       .replace('.hbs', '');
 
     await fs.writeFile(newPath, result);
