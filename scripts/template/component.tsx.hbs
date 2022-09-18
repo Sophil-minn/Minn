@@ -1,0 +1,28 @@
+import React, { CSSProperties, ReactNode } from 'react';
+// （1）传入一个对象：classnames({class1:true,class2:false}) ，
+// true表示相应的class生效，反之false表示不生效。
+//（2）接受多个类名：classnames(class1,class2,{ class3:false })
+import classNames from 'classnames';
+
+import './index.scss';
+
+export interface {{dirName}}Props extends React.HTMLAttributes<HTMLDivElement> {
+  className?: string;
+  type?: 'normal' | 'primary' | "dashed" | "text" | "link";
+  size?: "small" | "medium" | 'large';
+  children?: ReactNode;
+  style?: CSSProperties;
+}
+
+const {{componentName}} = (props: buttonProps) => {
+  const { children, size = 'medium', className, type = 'normal', style, ...others} = props;
+  const cls = classNames({
+    'ant-btn': true,
+    [`ant-btn-${size}`]: size,
+    [`ant-btn-${type}`]: type,
+    [className as string]: !!className
+  });
+  return <{{componentName}} {...others} className={cls} style={style}>{children}</ {{componentName}}>
+}
+
+export default {{componentName}} ;
