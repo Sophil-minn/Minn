@@ -6,7 +6,7 @@ import classNames from 'classnames';
 
 import './index.scss';
 
-interface iconProps extends React.HTMLAttributes<SVGElement> {
+interface iconProps extends React.HtmlHTMLAttributes<HTMLElement> {
   className?: string;
   type?: 'fixed';
   size?: number;
