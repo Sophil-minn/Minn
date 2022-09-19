@@ -2,7 +2,7 @@ import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import {{componentName}} from './index';
 
-describe({{componentName}}, () => {
+describe("{{componentName}}", () => {
   test('renders Button', () => {
     render(<{{componentName}}>click me </{{componentName}}>)
     const linkElement = screen.getByText(/click me/i);
