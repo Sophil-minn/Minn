@@ -13,14 +13,12 @@ export interface radioProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Radio = (props: radioProps) => {
-  const { children, style, ...others} = props;
+  const { children, style, className, ...others} = props;
   const cls = classNames({
-    'ant-btn': true,
-    [`ant-btn-${size}`]: size,
-    [`ant-btn-${type}`]: type,
+    'ant-radio': true,
     [className as string]: !!className
   });
-  return <Radio {...others} className={cls} style={style} />
+  return <span {...others} className={cls} style={style}>{children}</span>
 }
 
 export default Radio ;
