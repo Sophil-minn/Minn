@@ -36,7 +36,7 @@ const lowCase = str => str.replace(/[A-Z]/g, m => `-${m.toLowerCase()}`).replace
       .replace('.hbs', '');
 
     await fs.writeFile(newPath, result);
-      console.log(`write ${newPath} success`);
+      console.log(chalk.green(`write ${newPath} success`));
   }));
 })();
 
