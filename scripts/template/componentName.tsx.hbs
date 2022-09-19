@@ -8,14 +8,12 @@ import './index.scss';
 
 export interface {{dirName}}Props extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
-  type?: 'normal' | 'primary' | "dashed" | "text" | "link";
-  size?: "small" | "medium" | 'large';
   children?: ReactNode;
   style?: CSSProperties;
 }
 
 const {{componentName}} = (props: {{dirName}}Props) => {
-  const { children, size = 'medium', className, type = 'normal', style, ...others} = props;
+  const { children, style, ...others} = props;
   const cls = classNames({
     'ant-btn': true,
     [`ant-btn-${size}`]: size,
