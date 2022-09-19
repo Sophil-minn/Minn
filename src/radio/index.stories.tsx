@@ -23,11 +23,12 @@ Primary.args = {
 };
 
 
-export const Basic = () => { 
-  return (
-    <Radio> Radio</Radio>
-  )
+export const Basic = () => {
+  return <>
+    <Radio onChange={e=>console.log(e)}>Primary Radio</Radio>
+  </>
 }
+
 
 export const Secondary = Template.bind({});
 Secondary.args = {
