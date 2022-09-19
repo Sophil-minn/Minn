@@ -19,16 +19,13 @@ const Template: ComponentStory<typeof {{componentName}}> = (args) => <{{componen
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  type: 'primary',
   children: '{{componentName}}',
 };
 
 
 export const Basic = () => { 
   return (
-    <>
-    <{{componentName}} type="primary" >Primary {{componentName}}</{{componentName}}>
-  </>
+    <{{componentName}}> {{componentName}}</{{componentName}}>
   )
 }
 

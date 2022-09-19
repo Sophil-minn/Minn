@@ -19,16 +19,13 @@ const Template: ComponentStory<typeof Radio> = (args) => <Radio {...args} />;
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  type: 'primary',
   children: 'Radio',
 };
 
 
 export const Basic = () => { 
   return (
-    <>
-    <Radio type="primary" >Primary Radio</Radio>
-  </>
+    <Radio> Radio</Radio>
   )
 }
 
