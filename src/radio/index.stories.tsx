@@ -29,11 +29,17 @@ export const Basic = () => {
   </>
 }
 
+export const UnChecked = () => {
+  return <>
+    <Radio checked={false}>Primary Radio</Radio>
+  </>
+}
 
-export const Secondary = Template.bind({});
-Secondary.args = {
-  children: 'Radio',
-};
+export const Disabled = () => {
+  return <>
+    <Radio disabled> Radio</Radio>
+  </>
+}
 
 // export const Large = Template.bind({});
 // Large.args = {

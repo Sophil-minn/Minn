@@ -21,7 +21,7 @@ export interface radioProps extends React.HTMLAttributes<HTMLInputElement> {
 }
 
 const Radio = (props: radioProps) => {
-  const {disabled, className, children, style, onChange, value, ...others} = props;
+  const {disabled, className, children, style, onChange, ...others} = props;
 
   const [checked, setChecked] = useState(false);
   const inputEl = useRef(null);
@@ -36,9 +36,15 @@ const Radio = (props: radioProps) => {
       'ant-radio-wrapper-disabled': disabled,
   });
 
-  const handleClick = (e) => {
+  React.useEffect(() => {
+    if ('checked' in props && props.checked !== checked) {
+        setChecked(props.checked as boolean);
+    }
+}, [props.checked])
+
+  const handleClick = (e: any) => {
     if (disabled || checked) {
-        return;
+      return;
     }
 
     if (!('checked' in props)) {
@@ -46,15 +52,15 @@ const Radio = (props: radioProps) => {
     }
 
     if (typeof onChange === 'function') {
-        e.target = inputEl.current;
-        onChange(e);
+      e.target = inputEl.current;
+      onChange(e);
     }
   }
 
   return (
-    <span className={wrapperCls} onClick={handleClick}>
+    <span className={wrapperCls} onClick={handleClick} {...others}>
         <span className={cls} >
-            <input type="radio" className="ant-radio-input" value={value} ref={inputEl}/>
+            <input type="radio" className="ant-radio-input" value={checked as any} ref={inputEl}/>
             <span className="ant-radio-inner"></span>
         </span>
         <span>{props.children}</span>

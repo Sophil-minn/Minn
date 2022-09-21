@@ -8,17 +8,22 @@ describe("Radio", () => {
     const linkElement = screen.getByText(/click me/i);
     expect(linkElement).toBeInTheDocument();
   })
+  test('should support onChange', () => {
+    const onChange = jest.fn();
+    render(<Radio onChange={onChange}>click me</Radio>);
+  
+    const linkElement = screen.getByText(/click me/i);
+    fireEvent.click(linkElement);
+  
+    expect(onChange).toBeCalled();
+  });
+  
+  test('should support under control', () => {
+    const onChange = jest.fn();
+    render(<Radio checked onChange={onChange}>click me</Radio>);
+  
+    const linkElement = screen.getByText(/click me/i);
+    fireEvent.click(linkElement);
+    expect(onChange).toBeCalledTimes(0);
+  });
 })
-/**
-test('renders normal Radio', () => {
-  const { container } = render(<Radio>click me</Radio>);
-  // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-  expect(container.querySelector('.ant-btn-normal')).toBeInTheDocument();
-});
-
-test('renders small Button', () => {
-  const { container } = render(<Radio size='small'>click me</Radio>);
-  // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
-  expect(container.querySelector('.ant-btn-small')).toBeInTheDocument();
-});
-**/
