@@ -12,7 +12,7 @@ export interface {{dirName}}Props extends React.HTMLAttributes<HTMLDivElement> {
   style?: CSSProperties;
 }
 
-const {{Component}} = (props: {{dirName}}Props) => {
+const {{componentName}} = (props: {{dirName}}Props) => {
   const { children, style, className, ...others} = props;
   const cls = classNames({
     'ant-{{dirName}}': true,
@@ -21,4 +21,4 @@ const {{Component}} = (props: {{dirName}}Props) => {
   return <span {...others} className={cls} style={style}>{children}</span>
 }
 
-export default {{Component}} ;
+export default {{componentName}} ;

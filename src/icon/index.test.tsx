@@ -1,6 +1,6 @@
 import React from 'react';
 import { fireEvent, getByText, render, screen } from '@testing-library/react';
-import { waitFor } from "@testing-library/react-native";
+// import { waitFor } from "@testing-library/react-native";
 import Icon from './index';
 
 describe('Icon', () => {
@@ -27,8 +27,8 @@ test('renders custom className', () => {
 
 test('should support click', () => {
   const onClick = jest.fn();
-  const { container } = render(<Icon type="copy" onClick={onClick}/>);
-  const linkElement = container.querySelector('svg') as SVGSVGElement;
+  // const { container } = render(<Icon type="copy" onClick={onClick}/>);
+  const linkElement = screen.getByRole('svg');
   fireEvent.click(linkElement);
   expect(onClick).toBeCalled();
 })

@@ -13,8 +13,8 @@ describe('Tag', () => {
 
 test('should support onClose', () => {
   const onClose = jest.fn();
-  const { container } =  render(<Tag onClose={onClose}>close me</Tag>)
-  const linkElement = container.querySelector('span') as SVGSVGElement;
+  // const { container } =  render(<Tag onClose={onClose}>close me</Tag>)
+  const linkElement = screen.getByRole('span');
   fireEvent.click(linkElement);
   expect(onClose).toBeCalled();
 })
