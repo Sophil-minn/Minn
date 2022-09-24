@@ -21,7 +21,7 @@ export interface radioProps extends React.HTMLAttributes<HTMLInputElement> {
 }
 
 const Radio = (props: radioProps) => {
-  const {disabled, className, children, style, onChange, ...others} = props;
+  const {disabled, className, children, style, onChange, value, ...others} = props;
 
   const [checked, setChecked] = useState(false);
   const inputEl = useRef(null);
@@ -60,7 +60,7 @@ const Radio = (props: radioProps) => {
   return (
     <span className={wrapperCls} onClick={handleClick} {...others}>
         <span className={cls} >
-            <input type="radio" className="ant-radio-input" value={checked as any} ref={inputEl}/>
+            <input type="radio" className="ant-radio-input" value={value} ref={inputEl}/>
             <span className="ant-radio-inner"></span>
         </span>
         <span>{props.children}</span>
