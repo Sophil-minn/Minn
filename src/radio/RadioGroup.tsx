@@ -33,18 +33,18 @@ const RadioGroup = (props: radioProps) => {
   const handleClick = (e) => {
     const value = e.target.value;
     setValue(value);
-}
+  } 
 
-const newChildren = React.Children.map(children, (child:any) => {
-    if (child.type !== Radio) {
-        return null;
-    }
-    return React.cloneElement(child, {
-        checked: child.props.value === value,
-        disabled: disabled,
-        onChange: handleClick,
-    });
-})
+  const newChildren = React.Children.map(children, (child:any) => {
+      if (child.type !== Radio) {
+          return null;
+      }
+      return React.cloneElement(child, {
+          checked: child.props.value === value,
+          disabled: disabled,
+          onChange: handleClick,
+      });
+  })
 
 
   return (
