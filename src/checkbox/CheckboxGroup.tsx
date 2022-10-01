@@ -10,7 +10,7 @@ export interface GroupProps {
   /**
    * 默认数值
    */
-  defaultValue?: Array<string>;
+  defaultValue?: Array<string> | undefined;
   /**
    * 数值
    */
@@ -19,7 +19,7 @@ export interface GroupProps {
   /**
    * 是否禁用
    */
-  disabled?: boolean;
+  disabled?: boolean | any;
   /**
    * 回调事件
    */
@@ -31,7 +31,7 @@ export interface GroupProps {
 const Group = (props: GroupProps) => {
   const {disabled, children, onChange, ...others} = props;
 
-  const [value, setValue] = useState(props.defaultValue || props.value || []);
+  const [value, setValue] = useState<any>(props.defaultValue || props.value || []);
 
   useEffect(() => {
     if ('value' in props) {

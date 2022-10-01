@@ -22,7 +22,7 @@ export interface CheckboxProps {
   /**
    * 数值
    */
-  value?: string;
+  value?: string | undefined;
   /**
    * 回调事件
    */
@@ -33,7 +33,7 @@ export interface CheckboxProps {
 }
 
 export interface CheckboxChangeEventTarget {
-  value: string;
+  value: string | undefined;
   checked: boolean;
 }
 export interface CheckboxChangeEvent {
@@ -43,7 +43,7 @@ export interface CheckboxChangeEvent {
 const Checkbox = (props: CheckboxProps) => {
   const { prefixCls = 'ant-', onChange, disabled, value, ...others } = props;
 
-  const [checked, setCheck] = useState(props.defaultChecked || false);
+  const [checked, setCheck] = useState<boolean>(props.defaultChecked || false);
   const inputEl = useRef(null);
   const {onChange: conChange, disabled: cdisabled, value: values} = useContext(CheckboxContext);
 
@@ -55,11 +55,11 @@ const Checkbox = (props: CheckboxProps) => {
 
   useEffect(() => {
     if (values && 'value' in props) {
-      setCheck(values.indexOf(props.value) > -1);
+      setCheck(values.indexOf(props.value as string) > -1);
     }
   }, [values])
 
-  const handleClick = (e) => {
+  const handleClick = (e: {target: any}) => {
     if (disabled || cdisabled) {
       return;
     }

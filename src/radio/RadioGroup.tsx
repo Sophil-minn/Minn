@@ -6,6 +6,7 @@ import classNames from 'classnames';
 
 import './index.scss';
 import Radio from './index';
+import { InputType } from 'zlib';
 
 export interface radioProps extends React.HTMLAttributes<HTMLInputElement> {
   value?: string;
@@ -30,7 +31,7 @@ const RadioGroup = (props: radioProps) => {
 
   const [value, setValue] = useState(props.defaultValue || props.value);
   
-  const handleClick = (e) => {
+  const handleClick = (e: { target: { value: any; }; }) => {
     const value = e.target.value;
     setValue(value);
   } 

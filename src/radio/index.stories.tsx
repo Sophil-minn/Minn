@@ -25,7 +25,7 @@ Primary.args = {
 
 export const Basic = () => {
   return <>
-    <Radio onChange={e=>console.log(e)}>Primary Radio</Radio>
+    <Radio onChange={e=>console.log(e, e.target)}>Primary Radio</Radio>
   </>
 }
 

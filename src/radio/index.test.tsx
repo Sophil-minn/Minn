@@ -26,4 +26,20 @@ describe("Radio", () => {
     fireEvent.click(linkElement);
     expect(onChange).toBeCalledTimes(0);
   });
+  test('should support under control disable', () => {
+    const onChange = jest.fn();
+    render(<Radio checked={false} >click me</Radio>);
+  
+    const linkElement = screen.getByText(/click me/i);
+    fireEvent.click(linkElement);
+    expect(onChange).toBeCalledTimes(0);
+  });
+  test('should support disabled', () => {
+    const onChange = jest.fn();
+    render(<Radio disabled onChange={onChange}>click me</Radio>);
+  
+    const linkElement = screen.getByText(/click me/i);
+    fireEvent.click(linkElement);
+    expect(onChange).toBeCalledTimes(0);
+  });
 })
