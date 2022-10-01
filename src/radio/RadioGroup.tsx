@@ -8,11 +8,9 @@ import './index.scss';
 import Radio from './index';
 import { InputType } from 'zlib';
 
-export interface radioProps extends React.HTMLAttributes<HTMLInputElement> {
+export interface RadioProps extends React.HTMLAttributes<HTMLInputElement> {
   value?: string;
   defaultValue?: string;
-  checked?: boolean;
-  defaultChecked?: boolean;
   onChange?: (event: React.FormEvent<HTMLInputElement>) => void;
   /**
    * 禁用
@@ -23,7 +21,7 @@ export interface radioProps extends React.HTMLAttributes<HTMLInputElement> {
   style?: CSSProperties;
 }
 
-const RadioGroup = (props: radioProps) => {
+const RadioGroup = (props: RadioProps) => {
   const {disabled, className, children, style, onChange, ...others} = props;
   const cls = classNames({
     'ant-radio-group': true

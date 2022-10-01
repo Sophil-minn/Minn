@@ -32,7 +32,7 @@ export const UnderControl = () => {
   return <RadioGroup value="3">
     <Radio value="1" key="1" >选项1</Radio>
     <Radio value="2" key="2" >选项2</Radio>
-    <Radio value="3" key="3" >选项3</Radio>,
+    <Radio value="3" key="3" >选项3</Radio>
   </RadioGroup>
 }
 // export const Basic = () => {

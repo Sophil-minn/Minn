@@ -2,46 +2,90 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import Checkbox from './Checkbox';
+import Button from '../button';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'Example/Checkbox',
   component: Checkbox,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
-    backgroundColor: { control: 'color' },
   },
 } as ComponentMeta<typeof Checkbox>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Checkbox> = (args) => <Checkbox {...args} />;
 
-export const Primary = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Primary.args = {
+export const Basic = Template.bind({});
+Basic.args = {
   children: 'Checkbox',
 };
 
+export const UnderControl = Template.bind({});
+UnderControl.args = {
+  checked: false,
+  children: 'Checkbox',
+};
 
-export const Basic = () => { 
-  return (
-    <Checkbox> Checkbox</Checkbox>
-  )
+export const Disabled = () => {
+  return <>
+    <Checkbox defaultChecked={false} disabled />
+    <br />
+    <Checkbox defaultChecked disabled />
+  </>
 }
 
-export const Secondary = Template.bind({});
-Secondary.args = {
-  children: 'Checkbox',
-};
+class Demo extends React.Component {
+  state = {
+    checked: true,
+    disabled: false,
+  };
 
-// export const Large = Template.bind({});
-// Large.args = {
-//   size: 'large',
-//   label: 'Checkbox',
-// };
+  toggleChecked = () => {
+    this.setState({ checked: !this.state.checked });
+  };
 
-// export const Small = Template.bind({});
-// Small.args = {
-//   size: 'small',
-//   label: 'Checkbox',
-// };
+  toggleDisable = () => {
+    this.setState({ disabled: !this.state.disabled });
+  };
+
+  onChange = (e: any) => {
+    console.log('checked = ', e.target.checked);
+    this.setState({
+      checked: e.target.checked,
+    });
+  };
+
+  render() {
+    const label = `${this.state.checked ? 'Checked' : 'Unchecked'}-${
+      this.state.disabled ? 'Disabled' : 'Enabled'
+    }`;
+    return (
+      <>
+        <p style={{ marginBottom: '20px' }}>
+          <Checkbox
+            checked={this.state.checked}
+            disabled={this.state.disabled}
+            onChange={this.onChange}
+          >
+            {label}
+          </Checkbox>
+        </p>
+        <p>
+          <Button type="primary" size="small" onClick={this.toggleChecked}>
+            {!this.state.checked ? 'Check' : 'Uncheck'}
+          </Button>
+          <Button
+            style={{ margin: '0 10px' }}
+            type="primary"
+            size="small"
+            onClick={this.toggleDisable}
+          >
+            {!this.state.disabled ? 'Disable' : 'Enable'}
+          </Button>
+        </p>
+      </>
+    );
+  }
+}
+
+export const Controled = () => {
+  return <Demo />
+}
