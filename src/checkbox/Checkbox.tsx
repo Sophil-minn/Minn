@@ -96,7 +96,7 @@ const Checkbox = (props: CheckboxProps) => {
   });
 
   return (
-    <span className={wrapperCls} onClick={handleClick}>
+    <span className={wrapperCls} onClick={handleClick} {...others}>
       <span className={cls} >
         <input type="checkbox" ref={inputEl} value={value} checked={checked} onChange={handleChange} />
         <span className="ant-checkbox-inner"></span>
