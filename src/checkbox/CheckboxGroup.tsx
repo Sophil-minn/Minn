@@ -29,7 +29,7 @@ export interface GroupProps {
 }
 
 const Group = (props: GroupProps) => {
-  const {disabled, children, onChange, ...others} = props;
+  const {disabled, children, onChange } = props;
 
   const [value, setValue] = useState<any>(props.defaultValue || props.value || []);
 
@@ -57,7 +57,6 @@ const Group = (props: GroupProps) => {
       nvalue = value.concat([]);
       setValue(nvalue);
     }
-    
     onChange?.(nvalue);
   };
 
