@@ -30,7 +30,7 @@ describe("Input", () => {
   test('should support under control', () => {
     const App = () => {
       const [value, setValue] = React.useState('a3');
-      const handleChange = (e) => {
+      const handleChange = (e: any) => {
         setValue(e.target.value);
       }
       return <Input value={value} data-testid="t3" onChange={handleChange} />

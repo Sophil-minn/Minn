@@ -3,6 +3,7 @@ import React, { CSSProperties, ReactNode, useEffect, useRef, useState } from 're
 // true表示相应的class生效，反之false表示不生效。
 //（2）接受多个类名：classnames(class1,class2,{ class3:false })
 import classNames from 'classnames';
+import ResizeObserver from 'resize-observer-polyfill';
 
 import './index.scss';
 
@@ -29,13 +30,13 @@ const Avatar = (props: avatarProps) => {
   } = props;
   
   const [scale, setScale] = useState(1);
-  const wraperRef = useRef<HTMLSpanElement>(null)
-  const textRef = useRef<HTMLSpanElement>(null)
+  const wraperRef = useRef<any>(null)
+  const textRef = useRef<any>(null)
 
   useEffect(() => {
+    const node = textRef.current;
+    const wraperNode = wraperRef.current;
     const reRender = () => {
-      const node = textRef.current;
-      const wraperNode = wraperRef.current;
         if (!node || !wraperNode) {
           return;
         }
@@ -47,7 +48,9 @@ const Avatar = (props: avatarProps) => {
           (wraperWidth - gap * 2) / textWidth : 1;
         setScale(scale);
     }
-    reRender();
+    const ob = new ResizeObserver(reRender);
+    node && ob.observe(node);
+    
   }, [])
 
 
@@ -71,7 +74,7 @@ const Avatar = (props: avatarProps) => {
   //   ob.observe(node);
 
   // }, [])
-  
+
   const cls = classNames({
     'ant-avatar': true,
     'ant-avatar-lg': size === 'large',
