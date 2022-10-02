@@ -3,6 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import Input from './index';
 import { UserOutlined } from '@ant-design/icons';
+import TextArea from './TextArea';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -84,3 +85,20 @@ export const Control = () => {
     <button onClick={() => setValue('set by button')}> set value</button>
   </>
 }
+
+export const TextAreaAutoSize = () => (
+  <>
+    <TextArea placeholder="Autosize height based on content lines" autoSize />
+    <TextArea placeholder=" height based on content lines" />
+    <div style={{ margin: '24px 0' }} />
+    <TextArea
+      placeholder="Autosize height with minimum and maximum number of lines"
+      autoSize={{ minRows: 2, maxRows: 6 }}
+    />
+    <div style={{ margin: '24px 0' }} />
+    <TextArea
+      placeholder="Controlled autosize"
+      autoSize={{ minRows: 3, maxRows: 5 }}
+    />
+  </>
+);
