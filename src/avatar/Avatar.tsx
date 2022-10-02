@@ -33,47 +33,47 @@ const Avatar = (props: avatarProps) => {
   const wraperRef = useRef<any>(null)
   const textRef = useRef<any>(null)
 
-  useEffect(() => {
-    const node = textRef.current;
-    const wraperNode = wraperRef.current;
-    const reRender = () => {
-        if (!node || !wraperNode) {
-          return;
-        }
-        const wraperWidth = wraperNode.offsetWidth;
-        const textWidth = node.offsetWidth;
-        const gap = 4;
-  
-        const scale = wraperWidth - gap * 2 < textWidth ?
-          (wraperWidth - gap * 2) / textWidth : 1;
-        setScale(scale);
-    }
-    const ob = new ResizeObserver(reRender);
-    node && ob.observe(node);
-    
-  }, [])
-
-
-  // const textRefCallback = React.useCallback( (node: any) => {
-  //   if(!node) return;
+  // useEffect(() => {
+  //   const node = textRef.current;
+  //   const wraperNode = wraperRef.current;
   //   const reRender = () => {
-  //     const wraperNode = wraperRef.current;
-  //     if (!node || !wraperNode) {
-  //       return;
-  //     }
-  //     const wraperWidth = wraperNode.offsetWidth;
-  //     const textWidth = node.offsetWidth;
-  //     const gap = 4;
-
-  //     const scale = wraperWidth - gap * 2 < textWidth ?
-  //       (wraperWidth - gap * 2) / textWidth : 1;
-  //     setScale(scale);
+  //       if (!node || !wraperNode) {
+  //         return;
+  //       }
+  //       const wraperWidth = wraperNode.offsetWidth;
+  //       const textWidth = node.offsetWidth;
+  //       const gap = 4;
+  
+  //       const scale = wraperWidth - gap * 2 < textWidth ?
+  //         (wraperWidth - gap * 2) / textWidth : 1;
+  //       setScale(scale);
   //   }
-
   //   const ob = new ResizeObserver(reRender);
-  //   ob.observe(node);
-
+  //   node && ob.observe(node);
+    
   // }, [])
+
+
+  const textRefCallback = React.useCallback( (node: any) => {
+    if(!node) return;
+    const reRender = () => {
+      const wraperNode = wraperRef.current;
+      if (!node || !wraperNode) {
+        return;
+      }
+      const wraperWidth = wraperNode.offsetWidth;
+      const textWidth = node.offsetWidth;
+      const gap = 4;
+
+      const scale = wraperWidth - gap * 2 < textWidth ?
+        (wraperWidth - gap * 2) / textWidth : 1;
+      setScale(scale);
+    }
+
+    const ob = new ResizeObserver(reRender);
+    ob.observe(node);
+
+  }, [])
 
   const cls = classNames({
     'ant-avatar': true,
@@ -105,7 +105,7 @@ const Avatar = (props: avatarProps) => {
       {src ? (typeof src === 'string' ? <img src={src} /> : src) : null}
       {children ? (typeof children === 'string' ? <span
         style={textStyle}
-        ref={textRef}
+        ref={textRefCallback}
         className="ant-avatar-string">{children}</span> : children) : null}
     </span>
   );
