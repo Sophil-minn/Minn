@@ -33,41 +33,24 @@ const Avatar = (props: avatarProps) => {
   const textRef = useRef<HTMLSpanElement>(null)
 
   useEffect(() => {
-    const node = textRef.current;
-    const wraperNode = wraperRef.current;
-      if (!node || !wraperNode) {
-        return;
-      }
-      const wraperWidth = wraperNode.offsetWidth;
-      const textWidth = node.offsetWidth;
-      const gap = 4;
-
-      const scale = wraperWidth - gap * 2 < textWidth ?
-        (wraperWidth - gap * 2) / textWidth : 1;
-      setScale(scale);
-  }, [])
-
-
-  const textRefCallback = React.useCallback( (node: any) => {
-    if(!node) return;
     const reRender = () => {
+      const node = textRef.current;
       const wraperNode = wraperRef.current;
-      if (!node || !wraperNode) {
-        return;
-      }
-      const wraperWidth = wraperNode.offsetWidth;
-      const textWidth = node.offsetWidth;
-      const gap = 4;
-
-      const scale = wraperWidth - gap * 2 < textWidth ?
-        (wraperWidth - gap * 2) / textWidth : 1;
-      setScale(scale);
+        if (!node || !wraperNode) {
+          return;
+        }
+        const wraperWidth = wraperNode.offsetWidth;
+        const textWidth = node.offsetWidth;
+        const gap = 4;
+  
+        const scale = wraperWidth - gap * 2 < textWidth ?
+          (wraperWidth - gap * 2) / textWidth : 1;
+        setScale(scale);
     }
-
-    const ob = new ResizeObserver(reRender);
-    ob.observe(node);
-
+    reRender();
   }, [])
+
+
   // const textRefCallback = React.useCallback( (node: any) => {
   //   if(!node) return;
   //   const reRender = () => {
@@ -88,7 +71,7 @@ const Avatar = (props: avatarProps) => {
   //   ob.observe(node);
 
   // }, [])
-
+  
   const cls = classNames({
     'ant-avatar': true,
     'ant-avatar-lg': size === 'large',
@@ -119,7 +102,7 @@ const Avatar = (props: avatarProps) => {
       {src ? (typeof src === 'string' ? <img src={src} /> : src) : null}
       {children ? (typeof children === 'string' ? <span
         style={textStyle}
-        ref={textRefCallback}
+        ref={textRef}
         className="ant-avatar-string">{children}</span> : children) : null}
     </span>
   );
