@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import Input from './Input';
+import Input from './index';
 import { UserOutlined } from '@ant-design/icons';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -49,6 +49,19 @@ export const MaxLength = () => (
     <Input maxLength={20} onChange={onChange} />
   </>
 );
+
+export const TextAreaBasic = () => (
+  <>
+    <Input.TextArea onChange={onChange} defaultValue="a\nb\nc\nd\ncddd"/>
+  </>
+);
+
+export const TextAreaMaxLength = () => (
+  <>
+    <Input.TextArea showCount maxLength={20} onChange={onChange} />
+  </>
+);
+
 
 export const Prefix = () => {
   return <>
