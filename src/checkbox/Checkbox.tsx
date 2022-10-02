@@ -79,10 +79,6 @@ const Checkbox = (props: CheckboxProps) => {
         conChange(e);
     }
   }
-
-  const handleChange = () => {
-  }
-
   const cls = classNames({
     [`${prefixCls}checkbox`]: true,
     [`${prefixCls}checkbox`]: true,
@@ -98,7 +94,7 @@ const Checkbox = (props: CheckboxProps) => {
   return (
     <span className={wrapperCls} onClick={handleClick} {...others}>
       <span className={cls} >
-        <input type="checkbox" ref={inputEl} value={value} checked={checked} onChange={handleChange} />
+        <input type="checkbox" ref={inputEl} value={value} checked={checked} onChange={handleClick} />
         <span className="ant-checkbox-inner"></span>
       </span>
       <span>{props.children}</span>
