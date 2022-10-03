@@ -63,3 +63,39 @@ export const Dynamic: React.FC = () => {
   );
 };
 
+export const Circle = () => {
+  return <>
+    <Progress type="circle" percent={80} />
+  </>
+}
+
+export const DynamicCircle: React.FC = () => {
+  const [percent, setPercent] = React.useState(0);
+
+  const increase = () => {
+    let newPercent = percent + 10;
+    if (newPercent > 100) {
+      newPercent = 100;
+    }
+    setPercent(newPercent);
+  };
+
+  const decline = () => {
+    let newPercent = percent - 10;
+    if (newPercent < 0) {
+      newPercent = 0;
+    }
+    setPercent(newPercent);
+  };
+
+  return (
+    <>
+      <Progress percent={percent} type="circle"/>
+      <br /><br />
+
+      <MinusOutlined onClick={decline} />
+      <PlusOutlined onClick={increase} />
+    </>
+  );
+};
+

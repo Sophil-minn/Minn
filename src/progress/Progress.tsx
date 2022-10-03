@@ -26,6 +26,70 @@ const Progress = (props: progressProps) => {
     'ant-progress': true,
     [className as string]: !!className
   });
+  if (type === 'circle') {
+    let left = -135;
+    let right = -135;
+    if (percent < 50) {
+      right = (percent / 100) * 360 + right;
+      left = -135;
+    } else {
+      right = 45;
+      left = ((percent - 50) / 100) * 360 + left;
+    }
+   return  (
+      <div style={{
+        width: 200,
+        height: 200,
+        border: '20px solid #f5f5f5',
+        borderRadius: 100,
+        position: 'relative'
+      }}>
+        <div className="left wrapper" style={{
+          width: 100,
+          height: 200,
+          overflow: 'hidden',
+          position: 'absolute',
+          left: -20,
+          top: -20,
+        }}>
+          <div style={{
+            width: 200,
+            height: 200,
+            borderRadius: '50%',
+            border: '20px solid transparent',
+            borderLeftColor: processColor,
+            borderBottomColor: processColor,
+            position: 'absolute',
+            left: 0,
+            transform: `rotate(${left}deg)`,
+            transition: 'transform 0.3s ease-in-out'
+          }} />
+        </div>
+       <div className="right wrapper" style={{
+          width: 100,
+          height: 200,
+          overflow: 'hidden',
+          position: 'absolute',
+          right: -20,
+          top: -20
+        }}>
+          <div style={{
+          width: 200,
+          height: 200,
+          borderRadius: '50%',
+          border: '20px solid transparent',
+          borderTopColor: processColor,
+          borderRightColor: processColor,
+          position: 'absolute',
+          transform: `rotate(${right}deg)`,
+          right: 0,
+          transition: 'transform 0.3s ease-in-out'
+        }} />
+        </div>
+
+      </div>
+    );
+  }
   return (
     <div style={{
       display: 'flex',
