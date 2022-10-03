@@ -43,11 +43,11 @@ const Affix = (props: affixProps) => {
     ob.observe(node);
   }, [])
   
-  // const cls = classNames({
-  //   'ant-affix': true,
-  //   [className as string]: !!className
-  // });
-  return <div ref={wraperRefCB} >
+  const cls = classNames({
+    'ant-affix': true,
+    [className as string]: !!className
+  });
+  return <div ref={wraperRefCB}>
         {affixed ? <div style={wraperStyle} /> : null}
         <div style={affixed ? {
             position: 'fixed',
