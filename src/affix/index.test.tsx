@@ -1,11 +1,12 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import {{componentName}} from './index';
+import Affix from './index';
 
-describe("{{componentName}}", () => {
-  test('renders {{componentName}}', () => {
-    render(<{{componentName}}>click me </{{componentName}}>)
+describe("Affix", () => {
+  test('renders Affix', () => {
+    render(<Affix>click me </Affix>)
     const linkElement = screen.getByText(/click me/i);
     expect(linkElement).toBeInTheDocument();
   })
 })
+
