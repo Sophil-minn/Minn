@@ -60,3 +60,42 @@ export const Basic2 = () => {
 }
 
 
+export const Inline = () => (
+  <Menu mode="inline" defaultSelectedKeys={['mail']} style={{ width: 300 }}>
+    <Menu.Item id="mail" icon={<MailOutlined />}>
+      Navigation One
+    </Menu.Item>
+    <Menu.SubMenu id="SubMenu" title="Navigation Two - Submenu" icon={<SettingOutlined />}>
+      <Menu.Item id="two" icon={<AppstoreOutlined />}>
+        Navigation Two
+      </Menu.Item>
+      <Menu.Item id="three" icon={<AppstoreOutlined />}>
+        Navigation Three
+      </Menu.Item>
+    </Menu.SubMenu>
+  </Menu>
+);
+
+export const Inline2 = () => (
+  <Menu mode="inline" defaultSelectedKeys={['mail']} style={{ width: 300 }}>
+    <Menu.Item id="mail" icon={<MailOutlined />}>
+      Navigation One
+    </Menu.Item>
+    <Menu.SubMenu id="SubMenu" title="Navigation Two - Submenu" icon={<SettingOutlined />}>
+      <Menu.Item id="two" icon={<AppstoreOutlined />}>
+        Navigation Two
+      </Menu.Item>
+      <Menu.Item id="three" icon={<AppstoreOutlined />}>
+        Navigation Three
+      </Menu.Item>
+      <Menu.SubMenu id="SubMenu2" title="Navigation Two - Submenu2" icon={<SettingOutlined />}>
+        <Menu.Item id="two2" icon={<AppstoreOutlined />}>
+          Navigation Two2
+        </Menu.Item>
+        <Menu.Item id="three2" icon={<AppstoreOutlined />}>
+          Navigation Three2
+        </Menu.Item>
+      </Menu.SubMenu>
+    </Menu.SubMenu>
+  </Menu>
+);
