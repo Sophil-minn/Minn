@@ -8,20 +8,29 @@ import './index.scss';
 
 export interface ItemProps extends React.HTMLAttributes<HTMLElement> {
   className?: string;
-  children?: ReactNode;
-  style?: CSSProperties;
-  icon?: ReactNode;
+    prefix?: string;
+    key?: string;
+    id?: string;
+    icon?: ReactNode;
+    children?: ReactNode;
+    style?: CSSProperties;
 }
 
 const Item = (props: ItemProps) => {
-  const { children, style, className,icon, ...others} = props;
+  const { children, prefix='ant-', style, className,icon, ...others} = props;
   const cls = classNames({
-    'ant-menu-item': true,
+    [`${prefix}menu-item`]: true,
+    [`${prefix}menu-item-selected`]: true,
     [className as string]: !!className
-  });
+});
+  const iconEle = React.isValidElement(icon) ? React.cloneElement(icon, {
+    className: `${prefix}menu-item-icon`
+  }) : null;
+
   return <li {...others} className={cls} style={style}>
-    {icon ? <span className='ant-menu-item-icon'>{icon}</span>: null}
-    {children}</li>
+    {iconEle}
+    <span>{children}</span>
+    </li>
 }
 
 export default Item ;

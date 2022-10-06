@@ -8,20 +8,25 @@ import Item from './Item';
 import './index.scss';
 
 export interface menuProps extends React.HTMLAttributes<HTMLElement> {
+  prefix?: string;
   className?: string;
   children?: ReactNode;
   style?: CSSProperties;
-  mode?: 'horizontal' | 'vertical';
+  mode?: 'vertical' | 'horizontal' | 'inline';
+  theme?: 'light' | 'dark';
   defaultSelectedKeys?: Array<string>;
 }
 
 const Menu = (props: menuProps) => {
-  const { children, style, className, ...others} = props;
+  const { prefix = 'ant-',children, style, className,  mode = 'vertical',
+  theme = 'light', ...others} = props;
   const cls = classNames({
-    'ant-menu': true,
-    'ant-menu-root': true,
+    [`${prefix}menu`]: true,
+    [`${prefix}menu-root`]: true,
+    [`${prefix}menu-${mode}`]: true,
+    [`${prefix}menu-${theme}`]: true,
     [className as string]: !!className
-  });
+})
 
   // const newChildren = (children as any[])?.map((i:any) => (
   //   <Item id={i.key} key={i.key} icon={i.icon}>{i.label}</Item>
