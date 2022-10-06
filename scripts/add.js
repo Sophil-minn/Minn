@@ -40,7 +40,7 @@ const lowCase = str => str.replace(/[A-Z]/g, m => `-${m.toLowerCase()}`).replace
   }));
   const response = await fetch(`https://unpkg.com/antd@4.19.5/es/${dirName}/style/index.css`);
   const body = await response.text();
-
+  debugger;
   const scssFile = path.join(process.cwd(), `src/${dirName}/index.scss`);
   await fs.writeFile(scssFile, body);
 })();
