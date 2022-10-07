@@ -70,7 +70,7 @@ const SubMenu = (props: SubMenuProps) => {
 
   const iconEle = React.isValidElement(icon) ? React.cloneElement(icon, {
     className: "ant-menu-item-icon"
-  }) : null;
+  } as any) : null;
 
   const itemStyle = {
     paddingLeft: level * inlineIndent,

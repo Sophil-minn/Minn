@@ -29,7 +29,7 @@ const Item = (props: ItemProps) => {
 });
   const iconEle = React.isValidElement(icon) ? React.cloneElement(icon, {
     className: `${prefix}menu-item-icon`
-  }) : null;
+  } as any) : null;
 
   const itemStyle = {
     paddingLeft: level * inlineIndent,
