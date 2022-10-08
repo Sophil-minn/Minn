@@ -5,6 +5,7 @@ import React, { CSSProperties, useEffect, ReactNode, useState, ReactElement, use
 
 import './index.scss';
 import ReactDOM from 'react-dom';
+import useListener from './hooks/useListener';
 
 export interface overlayProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -27,34 +28,35 @@ const Overlay = (props: overlayProps) => {
     }
   }, [pvisible]);
 
-  useEffect(() => {
-    if (visible) {
-       const handleMouseDown = (e: any) => {
-        const safeNodeList: any[] = [];
-        // 弹窗默认为安全节点
-        if (overlayRef.current) {
-          safeNodeList.push(overlayRef.current);
-        }
-    
-        const clickNode = e.target;
-    
-        for (let index = 0; index < safeNodeList.length; index++) {
-          const node = safeNodeList[index];
-          if (node && node.contains(clickNode)) {
-            return;
-          }
-        }
-        onVisibleChange?.(false);
-       }
-       window.addEventListener('mousedown', handleMouseDown, false);
-       return () => {
-        window.removeEventListener('mousedown', handleMouseDown, false);
+  const handleMouseDown = (e: any) => {
+    const safeNodeList: any[] = [];
+    // 弹窗默认为安全节点
+    if (overlayRef.current) {
+      safeNodeList.push(overlayRef.current);
+    }
+
+    const clickNode = e.target;
+
+    for (let index = 0; index < safeNodeList.length; index++) {
+      const node = safeNodeList[index]; 
+      if (node && node.contains(clickNode)) {
+        return;
       }
     }
-    
-  }, [visible, overlayRef.current]);
+    onVisibleChange?.(false);
+   }
 
- 
+   const handleKeyDown = (e: any) => {
+    if (!visible || !overlayRef.current) {
+      return;
+    }
+    if (e.keyCode === 27) {
+      onVisibleChange?.(false);
+    }
+  }
+
+   useListener(window, 'mousedown', handleMouseDown, visible);
+   useListener(window, 'keydown', handleKeyDown, visible);
 
 
   if (!visible) { 
