@@ -14,7 +14,7 @@ interface buttonProps extends React.HTMLAttributes<HTMLButtonElement> {
   style?: React.CSSProperties;
 }
 
-const Button = (props: buttonProps) => {
+const Button = React.forwardRef<HTMLButtonElement, buttonProps>((props: buttonProps, ref) => {
   const { children, size = 'medium', className, type = 'normal', style, ...others} = props;
   const cls = classNames({
     'ant-btn': true,
@@ -22,7 +22,7 @@ const Button = (props: buttonProps) => {
     [`ant-btn-${type}`]: type,
     [className as string]: !!className
   });
-  return <button {...others} className={cls} style={style}>{children}</button>
-}
+  return <button ref={ref} {...others} className={cls} style={style}>{children}</button>
+});
 
 export default Button;

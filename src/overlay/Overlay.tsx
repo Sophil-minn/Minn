@@ -1,15 +1,17 @@
-import React, { CSSProperties, useEffect, ReactNode, useState, ReactElement, useRef, useCallback } from 'react';
-// （1）传入一个对象：classnames({class1:true,class2:false}) ，
-// true表示相应的class生效，反之false表示不生效。
-//（2）接受多个类名：classnames(class1,class2,{ class3:false })
+import React, { useCallback, useEffect, useState, useRef, ReactHTMLElement } from 'react';
+import { ReactNode, CSSProperties, ReactElement } from 'react';
+import ReactDOM from 'react-dom';
+import classNames from 'classnames';
+
+import useListener from './hooks/useListener';
+import getPlacement from './placement';
+import { PointsType, PlacementType } from './placement';
 
 import './index.scss';
-import ReactDOM from 'react-dom';
-import useListener from './hooks/useListener';
 
-export interface overlayProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface OverlayProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
-  children?: ReactNode;
+  children?: ReactElement;
   hasMask?: boolean;
   visible?: boolean;
   onVisibleChange?: Function;
@@ -20,19 +22,32 @@ export interface overlayProps extends React.HTMLAttributes<HTMLDivElement> {
   beforePosition?: Function;
 }
 
-const Overlay = (props: overlayProps) => {
-  const { children, hasMask = true, target, visible: pvisible, onVisibleChange, style, className, ...others} = props;
-  const [visible, setVisible] = useState( pvisible || false);
+const Overlay = (props: OverlayProps) => {
+  const {
+    className,
+    children,
+    style,
+    hasMask,
+    visible: pvisible,
+    onVisibleChange,
+    target,
+    points,
+    placement,
+    beforePosition,
+    ...others } = props;
+
+  const [visible, setVisible] = useState(pvisible || false);
   const [positionStyle, setPositionStyle] = useState({});
   const overlayRef = useRef(null);
 
   useEffect(() => {
     if ('visible' in props) {
-      setVisible(!!pvisible);
+      setVisible(pvisible as boolean);
     }
   }, [pvisible]);
 
-  const handleMouseDown = (e: any) => {
+  const handleMouseDown = (e: Event) => {
+
     const safeNodeList: any[] = [];
     // 弹窗默认为安全节点
     if (overlayRef.current) {
@@ -42,15 +57,18 @@ const Overlay = (props: overlayProps) => {
     const clickNode = e.target;
 
     for (let index = 0; index < safeNodeList.length; index++) {
-      const node = safeNodeList[index]; 
+      const node = safeNodeList[index];
       if (node && node.contains(clickNode)) {
         return;
       }
     }
-    onVisibleChange?.(false);
-   }
 
-   const handleKeyDown = (e: any) => {
+    onVisibleChange?.(false);
+  }
+
+  useListener(window, 'mousedown', handleMouseDown, visible);
+
+  const handleKeyDown = (e: any) => {
     if (!visible || !overlayRef.current) {
       return;
     }
@@ -59,44 +77,45 @@ const Overlay = (props: overlayProps) => {
     }
   }
 
-   useListener(window, 'mousedown', handleMouseDown, visible);
-   useListener(window, 'keydown', handleKeyDown, visible);
+  useListener(window, 'keydown', handleKeyDown, visible);
 
-    // 弹窗挂载，第一次 mount node=真实dom，卸载的时候 node=null
+
+  // 弹窗挂载，第一次 mount node=真实dom，卸载的时候 node=null
   const overlayRefCallback = useCallback((node: any) => {
     overlayRef.current = node;
 
     if (node && target) {
       const targetElement = typeof target === 'function' ? target() : target;
-      // const positionStyle = getPlacement({
-      //   target: targetElement, 
-      //   overlay: node, 
-      //   points,
-      //   placement,
-      //   beforePosition
-      // });
+      const positionStyle = getPlacement({
+        target: targetElement, 
+        overlay: node, 
+        points,
+        placement,
+        beforePosition
+      });
       setPositionStyle(positionStyle);
     }
 
   }, []);
 
-   const child: ReactElement | undefined = React.Children.only(children);
+  const childrenElement = typeof children === 'string' ? (<span>{children}</span>): children;
 
-   const newChildren = React.cloneElement(child, {
-     ...others,
-     ref: overlayRefCallback,
-     style: { ...positionStyle, ...child?.props?.style }
-   });
- 
+  const child: ReactElement | undefined = React.Children.only(childrenElement);
 
-  if (!visible) { 
+  const newChildren = child && React.cloneElement(child, {
+    ...others,
+    ref: overlayRefCallback,
+    style: { ...positionStyle, ...child?.props?.style }
+  });
+
+  if (!visible) {
     return null;
   }
 
-  return ReactDOM.createPortal(<div ref={overlayRef}>
+  return ReactDOM.createPortal(<div >
     {hasMask ? <div /> : null}
-    {children}
+    {newChildren}
   </div>, document.body);
 }
 
-export default Overlay ;
+export default Overlay;

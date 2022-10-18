@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import Overlay from './index';
+import Button from '@/button';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -49,6 +50,27 @@ export const UnderControl = () => {
         height: 300
       }}>
         Under Control Overlaymmmm
+      </div>
+    </Overlay>
+  </>
+}
+
+
+export const Points = () => {
+  const [visible, setVisible] = useState(true);
+  const buttonRef = useRef(null);
+  return <>
+    <Button onClick={() => setVisible(true)} ref={buttonRef}>click</Button>
+    <Overlay visible={visible} onVisibleChange={v => setVisible(v)}
+      target={() => buttonRef.current}
+      points={['tl', 'bl']}
+    >
+      <div style={{
+        border: '1px solid black',
+        width: 300,
+        height: 300
+      }}>
+        Points
       </div>
     </Overlay>
   </>
