@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import Overlay from './index';
-import Button from '@/button';
+import Button from '../button';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -21,7 +21,7 @@ export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
   children: <div style={{
-    border: '1px solid black',
+    border: '1px solid yellow',
     width: 300,
     height: 300
   }}>
@@ -32,45 +32,31 @@ Primary.args = {
 
 export const Basic = () => { 
   return (
-    <Overlay visible={true}>primary Overlay</Overlay>
+    <Overlay visible onVisibleChange={(e: any) => console.log(e)}>
+      <div style={{
+        border: '1px solid green',
+        width: 300,
+        height: 300
+      }}>
+        Primary Overlay
+      </div>
+    </Overlay>
   )
 }
+
 
 export const UnderControl = () => {
   const [visible, setVisible] = useState(true);
   const buttonRef = useRef(null);
   return <>
-    <button onClick={() => setVisible(!visible)} ref={buttonRef}>click</button>
-    <Overlay visible={visible} onVisibleChange={(v: any) => setVisible(v)}
-      target={() => buttonRef.current}
-    >
-      <div style={{
-        border: '1px solid black',
-        width: 300,
-        height: 300
-      }}>
-        Under Control Overlaymmmm
-      </div>
-    </Overlay>
-  </>
-}
-
-
-export const Points = () => {
-  const [visible, setVisible] = useState(true);
-  const buttonRef = useRef(null);
-  return <>
     <Button onClick={() => setVisible(true)} ref={buttonRef}>click</Button>
-    <Overlay visible={visible} onVisibleChange={v => setVisible(v)}
-      target={() => buttonRef.current}
-      points={['tl', 'bl']}
-    >
+    <Overlay visible={visible} onVisibleChange={(v: boolean) => setVisible(v)}>
       <div style={{
         border: '1px solid black',
         width: 300,
         height: 300
       }}>
-        Points
+        Under Control Overlay
       </div>
     </Overlay>
   </>

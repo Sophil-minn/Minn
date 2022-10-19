@@ -1,41 +1,33 @@
-import React, { useCallback, useEffect, useState, useRef, ReactHTMLElement } from 'react';
-import { ReactNode, CSSProperties, ReactElement } from 'react';
-import ReactDOM from 'react-dom';
+import React, { CSSProperties, ReactNode, useEffect, useRef, useState } from 'react';
+// （1）传入一个对象：classnames({class1:true,class2:false}) ，
+// true表示相应的class生效，反之false表示不生效。
+//（2）接受多个类名：classnames(class1,class2,{ class3:false })
 import classNames from 'classnames';
 
-import useListener from './hooks/useListener';
-import getPlacement from './placement';
-import { PointsType, PlacementType } from './placement';
-
 import './index.scss';
+import ReactDOM from 'react-dom';
+import { useListener } from './hooks/useListener';
 
-export interface OverlayProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface overlayProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
-  children?: ReactElement;
+  children?: ReactNode;
+  style?: CSSProperties;
   hasMask?: boolean;
   visible?: boolean;
-  onVisibleChange?: Function;
-  style?: CSSProperties;
   target?: HTMLElement | (() => HTMLElement);
-  points?: PointsType;
-  placement?: PlacementType;
-  beforePosition?: Function;
+  onVisibleChange?: Function;
 }
 
-const Overlay = (props: OverlayProps) => {
-  const {
-    className,
-    children,
-    style,
-    hasMask,
-    visible: pvisible,
+const Overlay = (props: overlayProps) => {
+  const { 
+    children, 
+    hasMask = true, 
+    visible: pvisible, 
+    style, 
+    className, 
     onVisibleChange,
     target,
-    points,
-    placement,
-    beforePosition,
-    ...others } = props;
-
+    ...others} = props;
   const [visible, setVisible] = useState(pvisible || false);
   const [positionStyle, setPositionStyle] = useState({});
   const overlayRef = useRef(null);
@@ -46,7 +38,12 @@ const Overlay = (props: OverlayProps) => {
     }
   }, [pvisible]);
 
-  const handleMouseDown = (e: Event) => {
+  const cls = classNames({
+    'ant-overlay': true,
+    [className as string]: !!className
+  });
+  
+  const handleMouseDown = (e: any) => {
 
     const safeNodeList: any[] = [];
     // 弹窗默认为安全节点
@@ -79,43 +76,14 @@ const Overlay = (props: OverlayProps) => {
 
   useListener(window, 'keydown', handleKeyDown, visible);
 
-
-  // 弹窗挂载，第一次 mount node=真实dom，卸载的时候 node=null
-  const overlayRefCallback = useCallback((node: any) => {
-    overlayRef.current = node;
-
-    if (node && target) {
-      const targetElement = typeof target === 'function' ? target() : target;
-      const positionStyle = getPlacement({
-        target: targetElement, 
-        overlay: node, 
-        points,
-        placement,
-        beforePosition
-      });
-      setPositionStyle(positionStyle);
-    }
-
-  }, []);
-
-  const childrenElement = typeof children === 'string' ? (<span>{children}</span>): children;
-
-  const child: ReactElement | undefined = React.Children.only(childrenElement);
-
-  const newChildren = child && React.cloneElement(child, {
-    ...others,
-    ref: overlayRefCallback,
-    style: { ...positionStyle, ...child?.props?.style }
-  });
-
   if (!visible) {
     return null;
   }
 
   return ReactDOM.createPortal(<div >
     {hasMask ? <div /> : null}
-    {newChildren}
+    {children}
   </div>, document.body);
 }
 
-export default Overlay;
+export default Overlay ;
