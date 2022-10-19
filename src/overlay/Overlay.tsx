@@ -6,7 +6,9 @@ import classNames from 'classnames';
 
 import './index.scss';
 import ReactDOM from 'react-dom';
+import getPlacement from './placement';
 import { useListener } from './hooks/useListener';
+import { PointsType, PlacementType } from './placement';
 
 export interface overlayProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -16,6 +18,9 @@ export interface overlayProps extends React.HTMLAttributes<HTMLDivElement> {
   visible?: boolean;
   target?: any;
   onVisibleChange?: Function;
+  points?: PointsType;
+  placement?: PlacementType;
+  beforePosition?: Function;
 }
 
 const Overlay = (props: overlayProps) => {
@@ -27,6 +32,9 @@ const Overlay = (props: overlayProps) => {
     className, 
     onVisibleChange,
     target,
+    points,
+    placement,
+    beforePosition,
     ...others} = props;
   const [visible, setVisible] = useState(pvisible || false);
   const [positionStyle, setPositionStyle] = useState({});
@@ -79,9 +87,22 @@ const Overlay = (props: overlayProps) => {
   const child: any = React.Children.only(children);
 
   // 弹窗挂载，第一次 mount node=真实dom，卸载的时候 node=null
-  const overlayRefCallback = useCallback((node: any) => {
+  const overlayRefCallback: any = useCallback((node: any) => {
     overlayRef.current = node;
-  }, []);
+    debugger;
+    if (node && target) {
+      const targetElement = typeof target === 'function' ? target() : target;
+      const positionStyle = getPlacement({
+        target: targetElement, 
+        overlay: node, 
+        points,
+        placement,
+        beforePosition
+      });
+      setPositionStyle(positionStyle);
+    }
+
+  }, [beforePosition, placement, points, target]);
 
   const newChildren = React.cloneElement(child, {
     ...others,

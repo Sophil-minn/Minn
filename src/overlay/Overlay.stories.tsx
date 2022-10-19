@@ -61,3 +61,23 @@ export const UnderControl = () => {
     </Overlay>
   </>
 }
+
+export const Points = () => {
+  const [visible, setVisible] = useState(true);
+  const buttonRef = useRef(null);
+  return <>
+    <Button onClick={() => setVisible(true)} ref={buttonRef}>click</Button>
+    <Overlay visible={visible} onVisibleChange={(v: boolean) => setVisible(v)}
+      target={() => buttonRef.current}
+      points={['bl', 'tl']}
+    >
+      <div style={{
+        border: '1px solid black',
+        width: 300,
+        height: 300
+      }}>
+        Points
+      </div>
+    </Overlay>
+  </>
+}
