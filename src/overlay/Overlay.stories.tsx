@@ -50,7 +50,7 @@ export const UnderControl = () => {
   const buttonRef = useRef(null);
   return <>
     <Button onClick={() => setVisible(true)} ref={buttonRef}>click</Button>
-    <Overlay visible={visible} onVisibleChange={(v: boolean) => setVisible(v)}>
+    <Overlay visible={visible} onVisibleChange={(v: boolean) => setVisible(v)} target={() => buttonRef.current}>
       <div style={{
         border: '1px solid black',
         width: 300,
