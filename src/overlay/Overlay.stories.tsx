@@ -70,6 +70,7 @@ export const Points = () => {
     <Overlay visible={visible} onVisibleChange={(v: boolean) => setVisible(v)}
       target={() => buttonRef.current}
       points={['bl', 'tl']}
+      placement='left'
     >
       <div style={{
         border: '1px solid black',

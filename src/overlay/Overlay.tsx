@@ -89,7 +89,6 @@ const Overlay = (props: overlayProps) => {
   // 弹窗挂载，第一次 mount node=真实dom，卸载的时候 node=null
   const overlayRefCallback: any = useCallback((node: any) => {
     overlayRef.current = node;
-    debugger;
     if (node && target) {
       const targetElement = typeof target === 'function' ? target() : target;
       const positionStyle = getPlacement({

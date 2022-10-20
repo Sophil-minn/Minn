@@ -29,7 +29,7 @@ interface placementConfig {
 export default function getPlacement({
   target,
   overlay,
-  placement,
+  placement = 'top',
   points: opoints = ['tl', 'bl'] as PointsType,
   beforePosition,
 }: placementConfig) {
@@ -49,8 +49,6 @@ export default function getPlacement({
   
     const baseTop = ttop - ctop + cscrollTop;
     const baseLeft = tleft - cleft + cscrollLeft;
-
-    debugger;
   
     let top = baseTop;
     let left = baseLeft;
@@ -71,7 +69,7 @@ export default function getPlacement({
         left += 0;
         break;
       case 'c':
-        left += twidth / 2;
+        left += twidth;
         break;
       case 'r':
         left += twidth;
