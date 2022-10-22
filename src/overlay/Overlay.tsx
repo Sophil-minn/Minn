@@ -10,7 +10,7 @@ import getPlacement from './placement';
 import { useListener } from './hooks/useListener';
 import { PointsType, PlacementType } from './placement';
 
-export interface overlayProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface OverlayProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
   children?: ReactNode;
   style?: CSSProperties;
@@ -23,7 +23,7 @@ export interface overlayProps extends React.HTMLAttributes<HTMLDivElement> {
   beforePosition?: Function;
 }
 
-const Overlay = (props: overlayProps) => {
+const Overlay = (props: OverlayProps) => {
   const { 
     children, 
     hasMask = true, 
@@ -103,7 +103,9 @@ const Overlay = (props: overlayProps) => {
 
   }, [beforePosition, placement, points, target]);
 
-  const newChildren = React.cloneElement(child, {
+  const childEle = typeof child === 'string' ? <span>{child}</span>: child;
+
+  const newChildren = React.cloneElement(childEle, {
     ...others,
     ref: overlayRefCallback,
     style: { ...positionStyle, ...child?.props?.style }

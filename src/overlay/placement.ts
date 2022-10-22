@@ -69,7 +69,7 @@ export default function getPlacement({
         left += 0;
         break;
       case 'c':
-        left += twidth;
+        left += twidth / 2;
         break;
       case 'r':
         left += twidth;
