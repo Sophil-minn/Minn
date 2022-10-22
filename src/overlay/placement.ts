@@ -42,6 +42,7 @@ export default function getPlacement({
   const { scrollWidth: cwidth, scrollHeight: cheight, scrollTop: cscrollTop, scrollLeft: cscrollLeft } = document.body;
 
   function getTopLeft(placement: PlacementType) {
+    console.log(placement, 'placementplacement=======');
     let points: PointsType = opoints;
     if (placement && placement in placementMap) {
       points = placementMap[placement] as PointsType;
@@ -52,6 +53,8 @@ export default function getPlacement({
   
     let top = baseTop;
     let left = baseLeft;
+    console.log(top, 'top---------');
+    console.log(left, 'left---------');
   
     switch (points[1][0]) {
       case 't':
@@ -110,11 +113,14 @@ export default function getPlacement({
   const {left = 0, top = 0} = (placement && getTopLeft(placement)) || {};
 
 
+
   let result = {
     position: 'absolute',
     top,
     left
   };
+
+  console.log(result, 'resultresult');
 
   if(left < 0 || top < 0 || left + owidth > cwidth || top + oheight > cheight) {
     let newPlacement = placement;

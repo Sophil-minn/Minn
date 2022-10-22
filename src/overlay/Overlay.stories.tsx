@@ -85,8 +85,7 @@ export const Points = () => {
 }
 
 export const Placement = () => {
-  const ref1 = useRef(null);
-  const topLeft = <Button ref={ref1}>topLeft</Button>;
+  const topLeft = <Button>topLeft</Button>;
   const top = <Button>top</Button>;
   const topRight = <Button>topRight</Button>;
   const leftTop = <Button>leftTop</Button>;
