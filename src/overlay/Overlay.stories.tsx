@@ -105,7 +105,7 @@ export const Placement = () => {
       <Popup trigger={topRight} placement="topRight">topRight</Popup>
     </div>
     <div style={{ width: 80, float: "left" }}>
-      <Popup trigger={leftTop} placement="leftTop">leftTop</Popup>
+      <Popup trigger={leftTop} placement="leftTop" triggerType="hover">leftTop</Popup>
       <Popup trigger={left} placement="left">left</Popup>
       <Popup trigger={leftBottom} placement="leftBottom">leftBottom</Popup>
     </div>
