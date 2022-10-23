@@ -20,7 +20,7 @@ export interface TooltipProps {
 }
 
 const Tooltip = (props: TooltipProps) => {
-  const { children, style, arrowPointAtCenter = true,  placement='top', title, className, ...others} = props;
+  const { children, style, arrowPointAtCenter = false,  placement='top', title, className, ...others} = props;
   const [realPlacement, setPlacement] = useState(placement);
   const cls = classNames({
     'ant-tooltip': true,
@@ -57,6 +57,7 @@ const handleBeforePosition = (position: { left: number; }, {target, placement}: 
   trigger={children as any}
   triggerType="hover" 
   className={cls} 
+  placement={placement}
   beforePosition={handleBeforePosition}
   style={style}>{overlayContent}</Popup>
 }
